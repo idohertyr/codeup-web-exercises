@@ -25,7 +25,6 @@ fieldset {
     padding: 1em;
     /* It should have no border */
     border-style: none;
-    /* Its background should be white */
     background: white;
 }
 
