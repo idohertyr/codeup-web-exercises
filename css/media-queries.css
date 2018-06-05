@@ -7,11 +7,11 @@ footer {
 }
 
 .alert-info {
-    width: 100%;
     border: lightgrey solid 1px;
     background: #c3ffff;
     text-align: center;
     padding: 10px 0;
+    margin: 5px;
 }
 
 .alert-info a {
