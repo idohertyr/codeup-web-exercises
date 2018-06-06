@@ -1,0 +1,32 @@
+.container-fluid {
+    padding: 0;
+}
+
+.navbar, .navbar-light, .navbar-brand {
+    color: rgba(0,0,0,.5) !important;
+
+}
+
+.jumbotron {
+    background-image: url("../img/pizza.png");
+}
+
+.pizza-world {
+    text-align: center;
+    padding: 10px;
+    background-color: white;
+    opacity: 0.7;
+}
+
+.card-header {
+    background-color: rgb(209,232,246);
+}
+
+.card>.col-lg-12 {
+    margin: 1em 0;
+}
+
+.btn-light {
+    background: white;
+    border: 1px solid #ced4da;
+}
