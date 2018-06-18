@@ -21,17 +21,20 @@
     var num = prompt('Enter an odd number between 1 - 50');
     num = parseInt(num);
 
-    while (!isNaN(num)) {
-        num = prompt('Try again. Enter an odd number between 1 - 50');
-        if (num > 1 && num < 50) {
-            if (num % 2 !== 0) {
-                break;
-            } else {
-                num = prompt('Try again. Enter an odd number between 1 - 50');
+    if (num > 1 && num < 50 && num !== 0) {
+        printNumbers(num);
+    } else {
+        while (!isNaN(num)) {
+            num = prompt('Try again. Enter an odd number between 1 - 50');
+            if (num > 1 && num < 50) {
+                if (num % 2 !== 0) {
+                    break;
+                } else {
+                    num = prompt('Try again. Enter an odd number between 1 - 50');
+                }
             }
         }
+        printNumbers(num)
     }
-
-    printNumbers(num);
 
 })();
