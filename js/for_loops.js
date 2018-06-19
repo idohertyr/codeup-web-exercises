@@ -17,13 +17,12 @@
     }
 
     // Pyramid of numbers 1-9
-    var output = '';
     for (var x = 0; x < 10; x++) {
+        var output = '';
         for (var j = 1; j <= x; j++) {
             output += x;
         }
         console.log(output);
-        output = '';
     }
 
     // Print 100 decremented by 5
