@@ -25,7 +25,9 @@
      * string, and <li> tags around each planet.
      */
     var planetsStringBR = planetsString.split('|').join('<br>');
-    var ulPlanetsString = '<ul><li>Mercury</li><li>Venus</li><li>Earth</li><li>Mars</li><li>Jupiter</li><li>Saturn</li><li>Uranus</li><li>Neptune</li></ul>';
+    var ulPlanetsString = '<ul><li>';
+    ulPlanetsString += planetsArray.join('</li><li>');
+    ulPlanetsString += '</li></ul>';
     console.log(planetsStringBR);
     console.log(ulPlanetsString);
 
