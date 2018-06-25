@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #map-canvas {
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="map-canvas"></div>
+
+    <script>
+        function initMap() {
+            var mapCanvas = document.getElementById('map-canvas');
+            var mapOptions = {
+                zoom: 13,
+                center: {
+                    lat: 29.426791,
+                    lng: -98.48602
+                }
+            };
+            var map = new google.maps.Map(mapCanvas, mapOptions);
+            //
+            // // Geocoding
+            // var geo = new google.maps.Geocoder();
+            //
+            // geo.geocode({address: '1 UTSA Circle'}, function (response, status) {
+            //
+            //     if (status === 'OK') {
+            //         map.setCenter(response[0].geometry.location);
+            //     } else {
+            //         alert('Invalid address!');
+            //     }
+            // });
+
+            // Marker
+            var marker = new google.maps.Marker({
+                position: {
+                    lat: 29.426791,
+                    lng: -98.48602
+                },
+                map: map
+            });
+
+            // Info Window
+            var infoWindow = new google.maps.InfoWindow({
+               content: 'This is Codeup'
+            });
+
+            map.addListener('dragend', function () {
+                infoWindow.open(map, marker);
+            });
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxIPbNd4ljI6NdSyP5ugk4XoKDzw2VEZM&callback=initMap" async defer></script>
+
+</body>
+</html>
