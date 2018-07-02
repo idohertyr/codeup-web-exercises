@@ -35,14 +35,54 @@
         <dt>10.</dt>
         <dd class="invisible">The Yellowstone Caldera, in Yellowstone National Park, is a super volcano that is responsible for three of the world’s six biggest volcano eruptions.t</dd>
     </dl>
-    <button>Toggle Me!</button>
+    <button id="invisible">Toggle Me!</button>
+
+    <h3>Park</h3>
+    <ul>
+        <li>some facts</li>
+        <li>some facts</li>
+        <li>some facts</li>
+        <li>some facts</li>
+    </ul>
+
+    <h3>Park</h3>
+    <ul>
+        <li>some facts</li>
+        <li>some facts</li>
+        <li>some facts</li>
+        <li>some facts</li>
+    </ul>
+
+    <h3>Park</h3>
+    <ul>
+        <li>some facts</li>
+        <li>some facts</li>
+        <li>some facts</li>
+        <li>some facts</li>
+    </ul>
+    <button id="highlight">I highlight stuff!</button>
 
     <script src="js/jquery-2.2.4.js"></script>
     <script>
         'use strict';
+        $(function () {
 
-        $('button').click(function () {
-            $('dd').toggleClass('invisible')
+            $('#invisible').click(function () {
+                $('dd').toggleClass('invisible');
+            });
+
+            $('#highlight').click(function () {
+                $('ul > li:last-child').css('background-color', 'yellow');
+            });
+
+            $('h3').on('click', function () {
+                $('ul > li:first-child').css('font-weight', 'bold');
+            });
+
+            $('li').on('click', function () {
+                $(this).parent().children().first().css('color', 'blue');
+            });
+
         });
     </script>
 </body>
