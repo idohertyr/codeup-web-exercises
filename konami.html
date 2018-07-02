@@ -2,9 +2,25 @@
 <html>
 <head>
     <title>Konami Code</title>
+
+    <style>
+        h1 {
+            font-size: 100px;
+            text-align: center;
+            padding-top: 250px;
+        }
+        .relative {
+            position: relative;
+        }
+    </style>
+
 </head>
 <body>
-<h1>Konami Code</h1>
+    <div>
+        <h1><span class="relative a">K</span><span class="relative b">o</span><span class="relative c">n</span><span class="relative b">a</span><span class="relative a">m</span><span class="relative c">i</span><span> </span><span class="relative a">C</span ><span class="b">o</span><span class="relative b">d</span><span class="c">e</span></h1>
+    </div>
+
+
 
 <script src="js/jquery-2.2.4.js"></script>
 <script>
@@ -13,7 +29,29 @@
     $(function () {
 
         function change() {
-            $('body').css('background-color', 'black');
+            var rand = [Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000)];
+            var size = [Math.floor(Math.random() * 80), Math.floor(Math.random() * 80), Math.floor(Math.random() * 80)];
+            var h = $('h1');
+            var b = $('body');
+
+            b.css('background-color', 'black');
+            b.css('color', 'white');
+
+            h.children('.a').animate({
+                'top': '+='+rand[0],
+                'font-size': size[0]
+            }, 4000);
+
+            h.children('.b').animate({
+                'left': '-='+rand[1],
+                'font-size': size[1]
+            }, 3000);
+
+            h.children('.c').animate({
+                'top': '-='+rand[2],
+                'font-size': size[2]
+            }, 5000);
+
         }
 
         var keyCodes = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65, 13];
