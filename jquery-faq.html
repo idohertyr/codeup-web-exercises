@@ -8,10 +8,26 @@
         .invisible {
             display: none;
         }
+
+        .wait {
+            display: none;
+        }
+
+        li {
+            display: none;
+        }
     </style>
     
 </head>
 <body>
+
+    <h2 class="wait">Would you like to register for the site?</h2>
+
+    <div>
+        <h1>Would you like to sign up for our newsletter?</h1>
+        <span>X</span>
+    </div>
+
     <h1>Facts about national parks</h1>
     <dl>
         <dt>1.</dt>
@@ -75,13 +91,23 @@
                 $('ul > li:last-child').css('background-color', 'yellow');
             });
 
-            $('h3').on('click', function () {
-                $('ul > li:first-child').css('font-weight', 'bold');
-            });
+            // $('h3').on('click', function () {
+            //     $('ul > li:first-child').css('font-weight', 'bold');
+            // });
 
             $('li').on('click', function () {
                 $(this).parent().children().first().css('color', 'blue');
             });
+
+            $('span').click(function () {
+                $(this).parent().hide();
+            });
+
+            $('h3').click(function () {
+                $(this).next().children().slideToggle();
+            });
+
+            $('.wait').delay(8000).fadeIn(800);
 
         });
     </script>
