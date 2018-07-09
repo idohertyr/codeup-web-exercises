@@ -19,6 +19,7 @@ $(document).ready(function () {
 
     $('#names-list').append('<ul></ul>');
     $('#add-names-btn').click(function () {
+        $('#names-list').html = '';
         people.forEach(function (person) {
             $('#names-list ul').append('<li>' + person.name + '</li>');
         });
