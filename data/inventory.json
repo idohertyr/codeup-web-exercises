@@ -30,5 +30,29 @@
             "tool"
         ],
         "price": 10
+    }, {
+        "title": "Ball Peen Hammer",
+        "quantity": 15,
+        "categories": [
+            "tool"
+        ],
+        "price": 15
+    }, {
+        "title": "Weedeater",
+        "quantity": 8,
+        "categories": [
+            "tool",
+            "outdoor",
+            "powered"
+        ],
+        "price": 250
+    }, {
+    "title": "Nail Gun",
+    "quantity": 25,
+    "categories": [
+        "tool",
+        "powered"
+    ],
+    "price": 200
     }
 ]
