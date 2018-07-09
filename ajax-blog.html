@@ -3,10 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Ajax Blog</title>
+
+    <style>
+        #posts {
+            margin-bottom: 3rem;
+        }
+    </style>
+
 </head>
 <body>
 
     <div id="posts"></div>
+
+    <script src="js/jquery-3.3.1.js"></script>
+    <script>
+        'use strict';
+
+        $(document).ready(function () {
+
+            function makeRequest() {
+                return $.ajax('data/blog.json');
+            }
+
+            function update(d) {
+                var posts = $('#posts');
+                posts.empty();
+
+                d.forEach(function (item) {
+                    posts.append('<h1>' + item.title + '</h1>');
+                    posts.append('<p>' + item.content + '</p>');
+                    posts.append('<h6>' + item.categories + '</h6>');
+                })
+            }
+
+            makeRequest().done(function (data) {
+                update(data);
+            });
+
+        });
+
+    </script>
 
 </body>
 </html>
