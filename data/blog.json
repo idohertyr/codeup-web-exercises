@@ -16,5 +16,15 @@
             "sugar"
         ],
         "date": "February 14, 2015"
+    }, {
+        "title": "The Third Post",
+        "content": "Codeup ipsum dolor amet tousled prism everyday carry next level. Cloud bread cred tbh, cardigan lyft fashion axe chillwave kombucha plaid small batch seitan pork belly thundercats. Banh mi fixie tofu try-hard paleo church-key pop-up snackwave air plant stumptown. Jianbing pabst umami selvage, paleo farm-to-table blue bottle meggings pickled. Literally gluten-free authentic freegan, truffaut XOXO flexitarian chicharrones shoreditch affogato. Intelligentsia church-key pug edison bulb, hashtag small batch hoodie banjo viral hell of.",
+        "categories": [
+            "school",
+            "code",
+            "programming",
+            "codeup"
+        ],
+        "date": "July 9, 2018"
     }
 ]
