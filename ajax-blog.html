@@ -43,8 +43,11 @@
                     var div = ('<div class="card my-3 w-75 mx-auto">' +
                                '<div class="card-body">' +
                                '<h1 class="card-title text-center">' + item.title + '</h1>' +
+                               '<h6 class="card-subtitle text-center mb-3">' + item.date + '</h6>' +
                                '<p class="card-text text-center mx-auto">' + item.content + '</p>' +
-                               '<h6 class="text-center">' + item.categories + '</h6>');
+                               '<h6 class="text-center">' + item.categories + '</h6>' +
+                               '</div> + ' +
+                               '</div>');
                     $('#posts:last').append(div);
                 })
             }
