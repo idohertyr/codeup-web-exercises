@@ -38,14 +38,15 @@
         "use strict";
 
         function makeRequest() {
-            return $.ajax('data/inventory.json');
+            $.ajax('data/inventory.json').done(function (data) {
+                update(data);
+            });
         }
 
         function update(d) {
             $('#insertProducts').empty();
 
             d.forEach(function (item, index) {
-                console.log(index);
                 var row = ('<tr>' +
                            '<th scope="row">' + (index+1) + '</th>' +
                            '<td>' + item.title + '</td>' +
@@ -57,14 +58,10 @@
             })
         }
 
-        makeRequest().done(function (data) {
-            update(data);
-        });
+        makeRequest();
 
         $('#refresh').click(function () {
-            makeRequest().done(function (data) {
-                update(data);
-            });
+            makeRequest();
         })
 
     })();
