@@ -10,9 +10,13 @@ h1 {
     font-weight: 900;
 }
 
-.jumbotron {
-    margin: 0;
-    padding: 0;
+p {
+    font-size: .75rem;
+}
+
+.btn {
+    border: none;
+    border-radius: 0;
 }
 
 .row {
@@ -35,15 +39,53 @@ h1 {
     background-color: rgb(25, 25, 25);
 }
 
-.temp {
+.content {
     text-align: center;
     vertical-align: middle;
     margin-top: auto;
     margin-bottom: auto
 }
 
-.temp > * {
+.content > * {
     margin: 0;
+}
+
+.pac-card {
+    box-sizing: border-box;
+    outline: none;
+    background-color: #F1F1F1;
+}
+.pac-controls {
+    display: inline-block;
+    padding: 5px 11px;
+}
+
+.pac-controls label {
+    font-size: 13px;
+    font-weight: 300;
+}
+
+#menu {
+    width: 100vw;
+}
+
+#pac-container {
+    padding-bottom: 12px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#pac-input {
+    background-color: #F1F1F1;
+    left: 25%!important;
+    font-size: 15px;
+    font-weight: 300;
+    text-overflow: ellipsis;
+    width: 50%;
+}
+
+#current-temp {
+    font-size: 4.5rem;
 }
 
 #map {
