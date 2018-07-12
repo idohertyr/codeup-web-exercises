@@ -10,10 +10,10 @@ $(document).ready(function () {
             lon: lon,
             units: 'imperial'
         }).done(function (data) {
-            var forecast = data.list; // Save only weather info
-            var daysArray = []; // Array for selected days
+            var forecast = data.list; // Weather info
+            var city = data.city.name + ', ' + data.city.country; // City
 
-            // Listener for click of days dropdown button
+            // Listener for click of dropdown button
             $('#menu').children().click(function () {
                 if ($(this)[0].id == 1) {
                    selectDays(0);
@@ -30,14 +30,17 @@ $(document).ready(function () {
 
             // Filter days displayed by dropdown selection
             var selectDays = function (step) {
-                daysArray = [];
+                var daysArray = [];
+                var dateArray = [];
                 forecast.forEach(function (item, index) {
-                    // console.log(item, index);
+                    dateArray.push(formatDate(item.dt_txt));
+
                     if (index % 8 === 0 && index <= step) {
-                        daysArray.push(item);
+                        daysArray.push(getData(item));
                     }
                 });
-                updateWeather(daysArray);
+                // getMinMax(forecast);
+                updateWeather(daysArray, city);
             };
 
             // Default 3 days
@@ -45,39 +48,74 @@ $(document).ready(function () {
         });
     }
 
-    // Update page with selected days and location
-    function updateWeather(days) {
-        $('#weather').empty();
-        console.log(days);
-        days.forEach(function (day) {
-            var div = ('<div class="col">' +
-                '<div class="card"' +
-                '<div class="card-body">' +
-                '<div class="row mt-3">' +
-                '<div class="col content">' +
-                '<p>' + 'TEMPERATURE' + '</p>' +
-                '<h1 id="current-temp">' + (Math.round(day.main.temp)) + '°' + '</h1>' +
-                // '<span>' + '<img src="http://openweathermap.org/img/w/' + day.weather[0].icon + '.png">' + '</span>' +
-                '<h5 class="p-2">' + day.weather[0].description.toUpperCase() + '</h5>' +
-                '<p class="pb-2">' + formatDate(day.dt_txt) + '</p>' +
-                '</div>' +
-                '<div class="col content mb-3">' +
-                '<p>' + 'HUMIDITY' + '</p>' +
-                '<h6 class="pb-2">' + (Math.round(day.main.humidity)) + '%' + '</h6>' +
-                '<p>' + 'WIND' + '</p>' +
-                '<h6 class="pb-2">' + (Math.round(day.wind.speed)) + ' mph' + '</h6>' +
-                '<p>' + 'PRESSURE' + '</p>' +
-                '<h6 class="pb-2">' + (Math.round(day.main.pressure)) + ' hPa' + '</h6>' +
-                '<p>' + 'MIN - MAX' + '</p>' +
-                '<h6>' + (Math.round(day.main.temp_max)) + '°' + '/' + (Math.round(day.main.temp_min)) + '°' + '</h6>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>' +
-                '</div>');
-
-            $('#weather:last').append(div);
+    function getData(day) {
+        var dayData = new Object({
+            currentTemp: Math.round(day.main.temp),
+            description: day.weather[0].description.toUpperCase(),
+            date: formatDate(day.dt_txt),
+            humidity: Math.round(day.main.humidity),
+            windSpeed: Math.round(day.wind.speed),
+            pressure: Math.round(day.main.pressure),
+            minTemp: Math.round(day.main.temp_min),
+            maxTemp: Math.round(day.main.temp_max)
         });
+        return dayData;
+    }
+
+    // function getMinMax(days) {
+    //     // Array of array for 5 days
+    //     var eachDay = [];
+    //
+    //     // Filter out 5 days
+    //     for (var i = 0; i <= days.length; i += 8) {
+    //         eachDay.push(days.slice(i, i+8));
+    //     }
+    //     // eachDay.pop();
+    //
+    //     var temp = [];
+    //     eachDay.forEach(function (day) {
+    //         day.forEach(function (d) {
+    //             temp.push(d.main.temp);
+    //         })
+    //     });
+    // }
+
+    // Update page with selected days and location
+    function updateWeather(days, cName) {
+        $('#weather').empty();
+        days.forEach(function (day) {
+            var weather = ('<div class="col">' +
+                       '<div class="card"' +
+                       '<div class="card-body">' +
+                       '<div class="row mt-3">' +
+                       '<div class="col content">' +
+                       '<p>' + 'TEMPERATURE' + '</p>' +
+                       '<h1 id="current-temp">' + day.currentTemp + '°' + '</h1>' +
+                       // '<span>' + '<img src="http://openweathermap.org/img/w/' + day.weather[0].icon + '.png">' + '</span>' +
+                       '<h5 class="pt-2">' + day.description + '</h5>' +
+                       '<p class="pb-2">' + day.date + '</p>' +
+                       '</div>' +
+                       '<div class="col content">' +
+                       '<p>' + 'HUMIDITY' + '</p>' +
+                       '<h6 class="pb-2">' + day.humidity + '%' + '</h6>' +
+                       '<p>' + 'WIND' + '</p>' +
+                       '<h6 class="pb-2">' + day.windSpeed + ' mph' + '</h6>' +
+                       '<p>' + 'PRESSURE' + '</p>' +
+                       '<h6 class="pb-2">' + day.pressure + ' hPa' + '</h6>' +
+                       '<p>' + 'MIN - MAX' + '</p>' +
+                       '<h6>' + day.maxTemp + '°' + '/' + day.minTemp + '°' + '</h6>' +
+                       '</div>' +
+                       '</div>' +
+                       '</div>' +
+                       '</div>' +
+                       '</div>');
+
+            $('#weather:last').append(weather);
+        });
+        var name = ('<div class="col-12">' +
+                    '<h1 class="text-center mt-5 mb-0">' + cName + '</h1>' +
+                    '</div>');
+        $('#weather:last').append(name);
     }
 
     // Format date
@@ -90,7 +128,7 @@ $(document).ready(function () {
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 29.426791, lng: -98.48602},
-            zoom: 10
+            zoom: 8
         });
 
         // Initial marker
