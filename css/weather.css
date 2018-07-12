@@ -14,6 +14,16 @@ p {
     font-size: .75rem;
 }
 
+input {
+    text-align: center;
+}
+
+input:focus {
+    border-style: none;
+    outline: 0;
+    box-shadow: none;
+}
+
 .btn {
     border: none;
     border-radius: 0;
@@ -77,8 +87,10 @@ p {
 
 #pac-input {
     background-color: #F1F1F1;
+    border-style: none;
+    outline: 0;
     left: 25%!important;
-    font-size: 15px;
+    font-size: 3rem;
     font-weight: 300;
     text-overflow: ellipsis;
     width: 50%;

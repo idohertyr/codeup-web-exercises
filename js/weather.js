@@ -31,12 +31,11 @@ $(document).ready(function () {
             // Filter days displayed by dropdown selection
             var selectDays = function (step) {
                 var daysArray = [];
-                var dateArray = [];
+                // var dateArray = [];
                 forecast.forEach(function (item, index) {
-                    dateArray.push(formatDate(item.dt_txt));
-
+                    // dateArray.push(formatDate(item.dt_txt));
                     if (index % 8 === 0 && index <= step) {
-                        daysArray.push(getData(item));
+                        daysArray.push(item);
                     }
                 });
                 // getMinMax(forecast);
@@ -46,20 +45,6 @@ $(document).ready(function () {
             // Default 3 days
             selectDays(16);
         });
-    }
-
-    function getData(day) {
-        var dayData = new Object({
-            currentTemp: Math.round(day.main.temp),
-            description: day.weather[0].description.toUpperCase(),
-            date: formatDate(day.dt_txt),
-            humidity: Math.round(day.main.humidity),
-            windSpeed: Math.round(day.wind.speed),
-            pressure: Math.round(day.main.pressure),
-            minTemp: Math.round(day.main.temp_min),
-            maxTemp: Math.round(day.main.temp_max)
-        });
-        return dayData;
     }
 
     // function getMinMax(days) {
@@ -90,20 +75,20 @@ $(document).ready(function () {
                        '<div class="row mt-3">' +
                        '<div class="col content">' +
                        '<p>' + 'TEMPERATURE' + '</p>' +
-                       '<h1 id="current-temp">' + day.currentTemp + '°' + '</h1>' +
+                       '<h1 id="current-temp">' + Math.round(day.main.temp) + '°' + '</h1>' +
                        // '<span>' + '<img src="http://openweathermap.org/img/w/' + day.weather[0].icon + '.png">' + '</span>' +
-                       '<h5 class="pt-2">' + day.description + '</h5>' +
-                       '<p class="pb-2">' + day.date + '</p>' +
+                       '<h5 class="pt-2">' + day.weather[0].description.toUpperCase() + '</h5>' +
+                       '<p class="pb-2">' + formatDate(day.dt_txt) + '</p>' +
                        '</div>' +
-                       '<div class="col content">' +
+                       '<div class="col content mb-5">' +
                        '<p>' + 'HUMIDITY' + '</p>' +
-                       '<h6 class="pb-2">' + day.humidity + '%' + '</h6>' +
+                       '<h6 class="pb-2">' + Math.round(day.main.humidity) + '%' + '</h6>' +
                        '<p>' + 'WIND' + '</p>' +
-                       '<h6 class="pb-2">' + day.windSpeed + ' mph' + '</h6>' +
+                       '<h6 class="pb-2">' + Math.round(day.wind.speed) + ' mph' + '</h6>' +
                        '<p>' + 'PRESSURE' + '</p>' +
-                       '<h6 class="pb-2">' + day.pressure + ' hPa' + '</h6>' +
+                       '<h6 class="pb-2">' + Math.round(day.main.pressure) + ' hPa' + '</h6>' +
                        '<p>' + 'MIN - MAX' + '</p>' +
-                       '<h6>' + day.maxTemp + '°' + '/' + day.minTemp + '°' + '</h6>' +
+                       '<h6>' + Math.round(day.main.temp_max) + '°' + '/' + Math.round(day.main.temp_min) + '°' + '</h6>' +
                        '</div>' +
                        '</div>' +
                        '</div>' +
@@ -112,16 +97,13 @@ $(document).ready(function () {
 
             $('#weather:last').append(weather);
         });
-        var name = ('<div class="col-12">' +
-                    '<h1 class="text-center mt-5 mb-0">' + cName + '</h1>' +
-                    '</div>');
-        $('#weather:last').append(name);
+        $('#pac-input').val('').attr('placeholder', cName);
     }
 
     // Format date
     function formatDate(date) {
-        var regex = /(^[^\s]+)/g; // regex for formatting date
-        return date.match(regex).toString().split('-').join('.');
+        var format = /(^[^\s]+)/g;
+        return date.match(format).toString().split('-').join('.');
     }
 
     // Google map
